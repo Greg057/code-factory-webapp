@@ -52,7 +52,20 @@
 .project-description {
     font-size: 16px;
     color: #666;
-    margin: 0;
+    margin: 0 0 10px;
+}
+
+/* Additional Project Info */
+.project-interest, .project-skill-level, .project-technologies {
+    font-size: 14px;
+    color: #333;
+    margin: 5px 0;
+}
+
+/* Highlighted Strong Tags */
+.project-interest strong, .project-skill-level strong, .project-technologies strong {
+    color: #ff5a5f;
+    font-weight: 600;
 }
 
 /* No Projects Text */
