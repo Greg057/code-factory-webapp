@@ -1,0 +1,12 @@
+<div class="projects-list">
+    <h3>Available Projects</h3>
+    <% if (projects.length > 0) { %>
+        <ul>
+            <% projects.forEach(project => { %>
+                <li><strong><%= project.title %></strong>: <%= project.description %></li>
+            <% }) %>
+        </ul>
+    <% } else { %>
+        <p>No projects available.</p>
+    <% } %>
+</div>
