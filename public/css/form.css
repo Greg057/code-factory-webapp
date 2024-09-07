@@ -37,6 +37,7 @@
     margin: 0;
 }
 
+/* divider */
 .filter-by:not(:last-child)::after {
     content: '';
     position: absolute;
@@ -68,16 +69,14 @@
 .filter-options {
     display: none;
     padding: 15px;
-    background-color: #f9f9f9;
-    border-radius: 8px;
     margin-top: 10px;
-    box-shadow: 0 4px 8px rgba(0, 0, 0, 0.1);
+    padding-bottom: 0;
+    margin-bottom: 0;
 }
 
-.filter-options label,
-.filter-options select,
-.filter-options input {
-    display: block;
+.filter-options .checkbox-label {
+    display: flex;
+    align-items: center;
     margin-bottom: 10px;
     padding: 10px;
     border: 1px solid #ccc;
@@ -85,10 +84,22 @@
     font-size: 16px;
     background-color: #ffffff;
 }
+  
+.filter-options .checkbox-label input {
+    margin-right: 24px;
+}
 
-.filter-options select, 
-.filter-options input {
+.filter-options select,
+.filter-options #technologies-input {
+    display: block;
+    margin-bottom: 10px;
+    padding: 10px;
+    border: 1px solid #ccc;
+    border-radius: 8px;
+    font-size: 16px;
+    background-color: #ffffff;
     width: 100%;
+    box-sizing: border-box;
 }
 
 /* Responsive Design */
