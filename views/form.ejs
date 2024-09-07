@@ -2,7 +2,7 @@
     <div class="filter-bar">
         <div class="filter-by" id="filter-by-interest" data-target="interest-options">
             <h4 class="filter-header">Interest</h4>
-            <h6 class="filter-text">Add interests</h6>
+            <h6 class="filter-text">Select interest</h6>
         </div>
         <div class="filter-by" id="filter-by-skill-level" data-target="skill-options">
             <h4 class="filter-header">Skill Level</h4>
@@ -17,18 +17,22 @@
 
     <!-- Interest Filter Options -->
     <div class="filter-options" id="interest-options">
-        <label class="checkbox-label"><input type="checkbox" name="interest" value="webdev">Web Development</label>
-        <label class="checkbox-label"><input type="checkbox" name="interest" value="mobiledev">Mobile Development</label>
-        <label class="checkbox-label"><input type="checkbox" name="interest" value="cybersecurity">Cybersecurity</label>
-        <label class="checkbox-label"><input type="checkbox" name="interest" value="backend">Backend</label>
-        <label class="checkbox-label"><input type="checkbox" name="interest" value="ai">AI</label>
-        <label class="checkbox-label"><input type="checkbox" name="interest" value="scripting">Scripting</label>
-        <label class="checkbox-label"><input type="checkbox" name="interest" value="gamedev">Game Development</label>
+        <select name="interest" id="interest-select">
+            <option value="">Select an interest</option>
+            <option value="Web Development">Web Development</option>
+            <option value="Mobile Development">Mobile Development</option>
+            <option value="Cybersecurity">Cybersecurity</option>
+            <option value="Backend">Backend</option>
+            <option value="AI">AI</option>
+            <option value="Scripting">Scripting</option>
+            <option value="Game Development">Game Development</option>
+        </select>
     </div>
 
     <!-- Skill Level Filter Options -->
     <div class="filter-options" id="skill-options">
         <select name="skill-level">
+            <option value="">Select skill level</option>
             <option value="beginner">Beginner</option>
             <option value="intermediate">Intermediate</option>
             <option value="advanced">Advanced</option>
@@ -37,7 +41,7 @@
 
     <!-- Tech Stack Filter Options -->
     <div class="filter-options" id="tech-options">
-        <input type="text" id="technologies-input" name="tech-stack" placeholder="Enter tech stack (e.g., React, Node.js)">
+        <input type="text" id="technologies-input" name="tech-stack" placeholder="Add technologies (e.g., Python, Angular, Rust, Express...)">
     </div>
 </form>
 

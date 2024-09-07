@@ -18,9 +18,13 @@
 .filter-by {
     flex-grow: 1;
     padding-left: 24px;
+    padding-right: 6px;
     text-align: left;
     position: relative;
     cursor: pointer;
+    width: 180px;
+    overflow: hidden;
+    text-overflow: ellipsis;
 }
 
 .filter-header {
@@ -35,6 +39,9 @@
     color: #7e7e7e;
     font-weight: 400;
     margin: 0;
+    white-space: nowrap; /* Prevents text from wrapping to the next line */
+    overflow: hidden; /* Hides overflowed text */
+    text-overflow: ellipsis; /* Shows "..." for overflowed text */
 }
 
 /* divider */
@@ -59,6 +66,7 @@
     border-radius: 20px;
     cursor: pointer;
     transition: background-color 0.3s ease;
+    white-space: nowrap;
 }
 
 .filter-bar button:hover {
