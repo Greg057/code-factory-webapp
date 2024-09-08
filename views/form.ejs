@@ -8,10 +8,6 @@
             <h4 class="filter-header">Skill Level</h4>
             <h6 class="filter-text"><%= skillLevel ? skillLevel : 'Select skill level'%></h6>
         </div>
-        <div class="filter-by" id="filter-by-tech-stack" data-target="tech-options">
-            <h4 class="filter-header">Tech Stack</h4>
-            <h6 class="filter-text"><%= techStack ? techStack : 'Add technologies'%></h6>
-        </div>
         <button type="submit">Apply Filters</button>
     </div>
 
@@ -38,11 +34,6 @@
             <option value="Intermediate" <%= (skillLevel === 'Intermediate') ? 'selected' : '' %>>Intermediate</option>
             <option value="Advanced" <%= (skillLevel === 'Advanced') ? 'selected' : '' %>>Advanced</option>
         </select>
-    </div>
-
-    <!-- Tech Stack Filter Options -->
-    <div class="filter-options" id="tech-options">
-        <input type="text" id="technologies-input" name="techStack" placeholder="Add technologies (e.g., Python, Angular, Rust, Express...)" value="<%= techStack || '' %>">
     </div>
 </form>
 

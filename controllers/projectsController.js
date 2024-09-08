@@ -1,10 +1,10 @@
 import db from '../db/queries.js'
 
 async function getProjects(req, res) {
-    const { interest, skillLevel, techStack } = req.query;
+    const { interest, skillLevel } = req.query;
     console.log(skillLevel)
-    const projects = await db.getFilteredProjects({ interest, skillLevel, techStack });
-    res.render('index', { projects, interest, skillLevel, techStack })
+    const projects = await db.getFilteredProjects({ interest, skillLevel });
+    res.render('index', { projects, interest, skillLevel })
 }
 
 export default { getProjects }

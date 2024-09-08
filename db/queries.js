@@ -13,10 +13,6 @@ async function getFilteredProjects(filters) {
         query += ' AND skill_level = $2';
         values.push(filters.skillLevel);
     }
-    if (filters.techStack) {
-        query += ' AND technologies ILIKE $3'; // Assuming tech_stack is a text field and using ILIKE for partial matching
-        values.push(`%${filters.techStack}%`);
-    }
 
     const { rows } = await pool.query(query, values);
     return rows;
