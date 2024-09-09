@@ -1,0 +1,36 @@
+.container {
+    width: 100%;
+    margin: 0 auto;
+}
+
+/* Header Styles */
+.header {
+    background-color: #282c34;
+    color: #ffffff;
+    padding: 20px 0;
+    box-shadow: 0 4px 8px rgba(0, 0, 0, 0.1);
+}
+
+.header-title {
+    margin: 0;
+    font-size: 2.5em;
+    text-align: center;
+    color: #61dafb;
+}
+
+.header-nav {
+    text-align: center;
+    margin-top: 10px;
+}
+
+.nav-link {
+    color: #ffffff;
+    text-decoration: none;
+    margin: 0 15px;
+    font-size: 1.2em;
+    transition: color 0.3s;
+}
+
+.nav-link:hover {
+    color: #61dafb;
+}
