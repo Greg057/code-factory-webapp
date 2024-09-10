@@ -6,4 +6,21 @@ async function getProjects(req, res) {
     res.render('index', { projects, interest, skillLevel })
 }
 
-export default { getProjects }
+async function getProjectDetails(req, res) {
+    const { id } = req.params;
+    console.log(id)
+    try {
+        const project = await db.getProjectById(id);
+        const milestones = await db.getMilestonesByProjectId(id);
+        if (project) {
+            res.render('projectDetails', { project, milestones });
+        } else {
+            res.status(404).send('Project not found');
+        }
+    } catch (err) {
+        console.error(err);
+        res.status(500).send('Server error');
+    }
+}
+
+export default { getProjects, getProjectDetails };

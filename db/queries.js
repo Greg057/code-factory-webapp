@@ -21,5 +21,17 @@ async function getFilteredProjects(filters) {
     return rows;
 }
 
-export default { getFilteredProjects };
+async function getProjectById(id) {
+    const query = `SELECT * FROM projects WHERE id = $1`;
+    const result = await pool.query(query, [id]);
+    return result.rows[0];
+}
+
+async function getMilestonesByProjectId(projectId) {
+    const query = `SELECT * FROM milestones WHERE project_id = $1 ORDER BY id`;
+    const result = await pool.query(query, [projectId]);
+    return result.rows;
+}
+
+export default { getFilteredProjects, getProjectById, getMilestonesByProjectId };
 

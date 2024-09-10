@@ -3,7 +3,7 @@
     <% if (projects.length > 0) { %>
         <ul class="project-items">
             <% projects.forEach(project => { %>
-                <li class="project-item">
+                <li class="project-item" data-id="<%= project.id %>">
                     <div class="project-info">
                         <h4 class="project-title"><%= project.title %></h4>
                         <p class="project-description"><%= project.description %></p>
@@ -17,4 +17,6 @@
         <p class="no-projects">No project found.</p>
     <% } %>
 </div>
+
+<script src="/js/projects.js" defer></script>
 

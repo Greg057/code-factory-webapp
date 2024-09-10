@@ -1,0 +1,32 @@
+<!-- projectDetails.ejs -->
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title><%= project.title %> - Project Details</title>
+</head>
+<body>
+    <h1><%= project.title %></h1>
+    <p><strong>Interest:</strong> <%= project.interest %></p>
+    <p><strong>Skill Level:</strong> <%= project.skill_level %></p>
+    <p><strong>Description:</strong> <%= project.description %></p>
+
+    <h2>Milestones</h2>
+    <ul>
+        <% milestones.forEach(milestone => { %>
+            <li>
+                <strong><%= milestone.title %>:</strong> <%= milestone.description %>
+                <% if (milestone.dependencies.length) { %>
+                    <p><strong>Dependencies:</strong> <%= milestone.dependencies.join(', ') %></p>
+                <% } %>
+                <% if (milestone.branches.length) { %>
+                    <p><strong>Branches:</strong> <%= milestone.branches.join(', ') %></p>
+                <% } %>
+            </li>
+        <% }) %>
+    </ul>
+
+    <a href="/">Back to projects</a>
+</body>
+</html>

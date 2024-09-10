@@ -23,7 +23,6 @@ document.addEventListener('DOMContentLoaded', () => {
     function updateFilterText() {
         const interestText = document.querySelector('#filter-by-interest .filter-text');
         const skillLevelText = document.querySelector('#filter-by-skill-level .filter-text');
-        const techStackText = document.querySelector('#filter-by-tech-stack .filter-text');
         
         // Get selected interest
         const interestSelect = document.querySelector('#interest-select');
@@ -34,10 +33,6 @@ document.addEventListener('DOMContentLoaded', () => {
         const skillLevelSelect = document.querySelector('#skill-options select');
         const selectedSkillLevel = skillLevelSelect.options[skillLevelSelect.selectedIndex].text;
         skillLevelText.textContent = selectedSkillLevel === 'Select skill level' ? 'Select skill level' : selectedSkillLevel;
-        
-        // Update tech stack filter text
-        const techStackInput = document.querySelector('#technologies-input');
-        techStackText.textContent = techStackInput.value || 'Add technologies';
     }
 
     // Attach event listener to interest select
@@ -45,7 +40,4 @@ document.addEventListener('DOMContentLoaded', () => {
 
     // Attach event listener to skill level select
     document.querySelector('#skill-options select').addEventListener('change', updateFilterText);
-
-    // Attach event listener to tech stack input
-    document.querySelector('#technologies-input').addEventListener('input', updateFilterText);
 });
