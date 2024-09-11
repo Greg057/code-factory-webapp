@@ -8,7 +8,6 @@ async function getProjects(req, res) {
 
 async function getProjectDetails(req, res) {
     const { id } = req.params;
-    console.log(id)
     try {
         const project = await db.getProjectById(id);
         const milestones = await db.getMilestonesByProjectId(id);
