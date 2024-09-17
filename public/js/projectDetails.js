@@ -1,56 +1,44 @@
 document.addEventListener('DOMContentLoaded', function () {
     const milestonesElement = document.getElementById('milestoneData');
+    const sidebar = document.getElementById('sidebar');
+    const closeSidebar = document.getElementById('closeSidebar');
+
+    console.log(sidebar.classList); 
+
+    closeSidebar.addEventListener('click', function () {
+        sidebar.classList.remove('open');
+    });
+
     if (milestonesElement) {
-        // Parse the JSON data from the data-milestones attribute
         const rawMilestones = JSON.parse(milestonesElement.getAttribute('data-milestones'));
         const milestones = transformData(rawMilestones);
 
-        // Minimum width for rectangles
         const minWidth = 120;
 
-        // Function to calculate the width of text
         function calculateTextWidth(text) {
             const canvas = document.createElement('canvas');
             const context = canvas.getContext('2d');
-            context.font = '12px Arial'; // Match the font size used in CSS
+            context.font = '12px Arial'; // Adjust font to match the actual font
             return context.measureText(text).width;
         }
 
-        // Set up the dimensions and margins for the SVG
         const width = 1000, height = 600;
         const svg = d3.select("#milestoneTree")
             .attr("width", width)
             .attr("height", height)
             .append("g")
-            .attr("transform", "translate(50, 50)");  // Adds margin
+            .attr("transform", "translate(50, 50)");
 
-        // Create a tree layout and set the size
         const treeLayout = d3.tree()
-            .size([width - 100, height - 100]);  // Set width/height to avoid clipping
+            .size([width - 100, height - 100]);
 
-        // Hierarchical data format
         const root = d3.hierarchy(milestones);
-
-        // Generate the tree structure
         treeLayout(root);
 
-        // Create a diagonal path generator for the links (curvy arrows)
+        // Create a diagonal path generator for the links
         const diagonal = d3.linkVertical()
-            .x(d => d.x)  // x-position of the link
-            .y(d => d.y); // y-position of the link
-
-        // Add arrows at the end of the lines
-        svg.append("defs").append("marker")
-            .attr("id", "arrow")
-            .attr("viewBox", "0 -5 10 10")
-            .attr("refX", 10)
-            .attr("refY", 0)
-            .attr("markerWidth", 6)
-            .attr("markerHeight", 6)
-            .attr("orient", "auto")
-            .append("path")
-            .attr("d", "M0,-5L10,0L0,5")
-            .style("fill", "#ccc");  // Color of the arrow
+            .x(d => d.x)
+            .y(d => d.y);
 
         // Add links between nodes
         svg.selectAll(".link")
@@ -58,7 +46,10 @@ document.addEventListener('DOMContentLoaded', function () {
             .enter()
             .append("path")
             .attr("class", "link")
-            .attr("d", diagonal);  // Use the diagonal generator for curvy links
+            .attr("d", diagonal) // Use the diagonal generator for curvy links
+            .style("fill", "none") // Ensure the path has no fill
+            .style("stroke", "#333") // Link color
+            .style("stroke-width", "2px"); // Link thickness
 
         // Add the nodes (rectangles)
         const node = svg.selectAll(".node")
@@ -66,37 +57,53 @@ document.addEventListener('DOMContentLoaded', function () {
             .enter()
             .append("g")
             .attr("class", "node")
-            .attr("transform", d => `translate(${d.x},${d.y})`);  // Position nodes
+            .attr("transform", d => `translate(${d.x},${d.y})`)
+            .on("click", function (event, d) {
+                // Open the sidebar and display milestone details
+                sidebar.classList.add('open');
+                document.getElementById('sidebarContent').innerHTML = `
+                    <h2>${d.data.name}</h2>
+                    <p><strong>Description:</strong> ${d.data.description || 'No description available'}</p>
+                    <p><strong>Interest:</strong> ${d.data.interest || 'N/A'}</p>
+                    <p><strong>Skill Level:</strong> ${d.data.skill_level || 'N/A'}</p>
+                `;
+            });
 
-        // Add rectangles to the nodes with rounded corners
+        // Add rectangles to the nodes with dynamic width and padding
         node.append("rect")
-            .attr("width", d => Math.max(minWidth, calculateTextWidth(d.data.name) + 20)) // Ensure minimum width
-            .attr("height", 40)   // Height of the rectangle
-            .attr("rx", 10)       // Rounded corners for the rectangle
-            .attr("ry", 10)       // Rounded corners for the rectangle
-            .attr("x", d => -Math.max(minWidth, calculateTextWidth(d.data.name) + 20) / 2) // Center the rectangle around the node's position
-            .attr("y", -20);      // Centering the rectangle
+            .attr("width", d => Math.max(minWidth, calculateTextWidth(d.data.name) + 20)) // Padding added for text
+            .attr("height", 40)
+            .attr("rx", 10)
+            .attr("ry", 10)
+            .attr("x", d => -Math.max(minWidth, calculateTextWidth(d.data.name) + 20) / 2)
+            .attr("y", -20)
+            .style("fill", "#e0f7fa") // Light background for better contrast
+            .style("stroke", "#333")  // Dark border for rectangles
+            .style("stroke-width", "2px")
+            
 
         // Add text to the rectangles
         node.append("text")
             .attr("dy", ".35em")
             .attr("x", 0)
             .style("text-anchor", "middle")
-            .text(d => d.data.name);
-
-
-        // Remove temporary SVG element
-        tempSvg.remove();
-    } else {
-        console.error('Element with id "milestoneData" not found');
+            .style("fill", "#333")  // Dark text color for visibility
+            .text(d => d.data.name)
+            .each(function (d) {
+                // If text is too wide, reduce font size to fit
+                const textWidth = calculateTextWidth(d.data.name);
+                const rectWidth = Math.max(minWidth, textWidth + 20);
+                if (textWidth > rectWidth - 20) {
+                    d3.select(this).style("font-size", "10px"); // Adjust font size if overflowing
+                }
+            });
     }
 });
 
 function transformData(milestones) {
     const root = { name: "Start", children: [] };
-    const lookup = {};  // To keep track of nodes by their IDs
+    const lookup = {};
 
-    // Initialize nodes and add them to lookup
     milestones.forEach(milestone => {
         lookup[milestone.id] = { 
             name: milestone.title, 
@@ -104,7 +111,6 @@ function transformData(milestones) {
         };
     });
 
-    // Build the hierarchical structure
     milestones.forEach(milestone => {
         if (milestone.dependencies.length === 0) {
             root.children.push(lookup[milestone.id]);

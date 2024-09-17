@@ -1,39 +1,130 @@
+/* General Styles */
+body {
+  margin: 0;
+  padding: 0;
+  background-color: rgb(233, 233, 233);
+  box-sizing: border-box;
+  font-family: system-ui, -apple-system, BlinkMacSystemFont, 'Segoe UI', Roboto, Oxygen, Ubuntu, Cantarell, 'Open Sans', 'Helvetica Neue', sans-serif;
+}
+
+/* Sidebar styles */
+.sidebar {
+  position: fixed;
+  top: 0;
+  right: 0;
+  width: 80%; /* Adjust width as needed */
+  height: 100%;
+  background-color: #fff;
+  box-shadow: -2px 0 5px rgba(0, 0, 0, 0.2);
+  transform: translateX(100%);
+  z-index: 1000; /* Ensure the sidebar is above other content */
+}
+
+.sidebar.open {
+  transform: translateX(0);
+  transition: transform 0.3s ease;
+}
+
+.close-btn {
+  position: absolute;
+  top: 10px;
+  right: 10px;
+  background: none;
+  border: none;
+  font-size: 30px;
+  cursor: pointer;
+  color: #333;
+}
+
+#sidebarContent {
+  padding: 20px;
+}
+
+/* Project Details Page */
+.container {
+  width: 90%;
+  margin: 0 auto;
+  padding: 20px;
+}
+
+.project-header {
+  border-bottom: 2px solid #f0f0f0;
+  padding-bottom: 20px;
+  margin-bottom: 20px;
+}
+
+.project-title {
+  font-size: 26px;
+  color: #ff5a5f;
+  margin-bottom: 10px;
+}
+
+.project-info p {
+  font-size: 16px;
+  color: #333;
+  margin: 5px 0;
+}
+
+.project-description {
+  font-size: 16px;
+  color: #666;
+  margin-top: 10px;
+}
+
+.milestone-section {
+  margin-top: 30px;
+}
+
+.milestone-title {
+  font-size: 22px;
+  color: #333;
+  margin-bottom: 15px;
+}
+
+.milestone-container {
+  overflow-x: auto;
+  padding: 10px;
+}
+
+#milestoneTree {
+  width: 100%;
+  height: 600px;
+}
+
+.back-link {
+  display: inline-block;
+  margin-top: 30px;
+  font-size: 16px;
+  color: #ff5a5f;
+  text-decoration: none;
+}
+
+.back-link:hover {
+  text-decoration: underline;
+}
+
+.node {
+  cursor: pointer;
+}
+
 /* Styling for the tree nodes */
 .node rect {
-  fill: #4CAF50;       /* Green background for nodes */
+  fill: #e0f7fa;       /* Light blue background for nodes */
   stroke: #333;        /* Dark border for rectangles */
   stroke-width: 2px;   /* Thickness of the rectangle borders */
 }
 
 /* Text inside the nodes */
 .node text {
-  font: 12px sans-serif;
-  fill: white;         /* White text color */
+  font: 12px Arial, sans-serif;
+  fill: #333;         /* Dark text color for better contrast */
   text-anchor: middle; /* Center the text inside the node */
 }
 
-/* Styling for the links (curvy arrows) between nodes */
+/* Styling for the links (curvy lines) between nodes */
 .link {
   fill: none;          /* No fill for links, just strokes */
-  stroke: #ccc;        /* Light gray lines for links */
+  stroke: #333;        /* Dark gray lines for links */
   stroke-width: 2px;   /* Thickness of the lines */
-  marker-end: url(#arrow); /* Adds arrow markers to the end of links */
 }
 
-/* Arrow marker style */
-marker path {
-  fill: #ccc;          /* Same color as the link for arrows */
-}
-
-/* Tooltip style for node hover (optional if you want tooltips) */
-.tooltip {
-  position: absolute;
-  text-align: center;
-  padding: 6px;
-  font-size: 12px;
-  background: #333;
-  color: #fff;
-  border-radius: 4px;
-  pointer-events: none;
-  box-shadow: 0px 2px 10px rgba(0, 0, 0, 0.3);
-}

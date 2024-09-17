@@ -1,4 +1,11 @@
-<!-- projectDetails.ejs -->
+<!-- Sidebar for displaying milestone details -->
+<div id="sidebar" class="sidebar">
+    <button id="closeSidebar" class="close-btn">&times;</button>
+    <div id="sidebarContent">
+        <!-- Content will be dynamically added here -->
+    </div>
+</div>
+
 <!DOCTYPE html>
 <html lang="en">
 <head>
@@ -6,22 +13,34 @@
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title><%= project.title %> - Project Details</title>
     <link rel="stylesheet" href="/css/projectDetails.css">
+    <link rel="stylesheet" href="/css/header.css">
 </head>
 <body>
-    <h1><%= project.title %></h1>
-    <p><strong>Interest:</strong> <%= project.interest %></p>
-    <p><strong>Skill Level:</strong> <%= project.skill_level %></p>
-    <p><strong>Description:</strong> <%= project.description %></p>
+    <%- include('header') %>
+    <div class="container">
+        <header class="project-header">
+            <h1 class="project-title"><%= project.title %></h1>
+            <div class="project-info">
+                <p class="project-interest"><strong>Interest:</strong> <%= project.interest %></p>
+                <p class="project-skill"><strong>Skill Level:</strong> <%= project.skill_level %></p>
+            </div>
+            <p class="project-description"><%= project.description %></p>
+        </header>
 
-    <h2>Milestones</h2>    
+        <section class="milestone-section">
+            <h2 class="milestone-title">Milestones</h2>
+            <div id="milestoneData" data-milestones='<%- JSON.stringify(milestones) %>'></div>
+            <div class="milestone-container">
+                <svg id="milestoneTree"></svg>
+            </div>
+        </section>
 
-    <div id="milestoneData" data-milestones='<%- JSON.stringify(milestones) %>'></div>
-    <svg id="milestoneTree"></svg> 
-
-    <a href="/">Back to projects</a>
+        <footer class="footer">
+            <a href="/" class="back-link">← Back to Projects</a>
+        </footer>
+    </div>
 
     <script type="module" src="/js/projectDetails.js" defer></script>
     <script src="https://d3js.org/d3.v7.min.js"></script>
-
 </body>
 </html>
