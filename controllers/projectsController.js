@@ -12,7 +12,7 @@ async function getProjectDetails(req, res) {
         const project = await db.getProjectById(id);
         const milestones = await db.getMilestonesByProjectId(id);
         if (project) {
-            res.render('projectDetails', { project, milestones });
+            res.render('projectDetails', { project, milestones, milestoneDetails: null });
         } else {
             res.status(404).send('Project not found');
         }
@@ -22,4 +22,21 @@ async function getProjectDetails(req, res) {
     }
 }
 
-export default { getProjects, getProjectDetails };
+async function getMilestoneDetails(req, res) {
+    const { id, milestone } = req.params  
+    try {
+        const project = await db.getProjectById(id);
+        const milestones = await db.getMilestonesByProjectId(id);
+        const milestoneDetails = await db.getMilestonesDetailsByName(milestone)
+        if (milestoneDetails) {
+            res.render('projectDetails', { project, milestones, milestoneDetails });
+        } else {
+            res.status(404).send('Milestone not found');
+        }
+    } catch (err) {
+        console.error(err);
+        res.status(500).send('Server error');
+    }
+}
+
+export default { getProjects, getProjectDetails, getMilestoneDetails };

@@ -1,12 +1,8 @@
 document.addEventListener('DOMContentLoaded', function () {
     const milestonesElement = document.getElementById('milestoneData');
-    const sidebar = document.getElementById('sidebar');
-    const closeSidebar = document.getElementById('closeSidebar');
 
-    console.log(sidebar.classList); 
-
-    closeSidebar.addEventListener('click', function () {
-        sidebar.classList.remove('open');
+    document.getElementById('closeSidebar').addEventListener('click', () => {
+        document.getElementById('sidebar').style.display = 'none';
     });
 
     if (milestonesElement) {
@@ -58,15 +54,9 @@ document.addEventListener('DOMContentLoaded', function () {
             .append("g")
             .attr("class", "node")
             .attr("transform", d => `translate(${d.x},${d.y})`)
-            .on("click", function (event, d) {
-                // Open the sidebar and display milestone details
-                sidebar.classList.add('open');
-                document.getElementById('sidebarContent').innerHTML = `
-                    <h2>${d.data.name}</h2>
-                    <p><strong>Description:</strong> ${d.data.description || 'No description available'}</p>
-                    <p><strong>Interest:</strong> ${d.data.interest || 'N/A'}</p>
-                    <p><strong>Skill Level:</strong> ${d.data.skill_level || 'N/A'}</p>
-                `;
+            .on("click", (event, d) => {
+                const currentPath = window.location.pathname;
+                window.location.href = `${currentPath}/${d.data.name}`;
             });
 
         // Add rectangles to the nodes with dynamic width and padding

@@ -33,5 +33,11 @@ async function getMilestonesByProjectId(projectId) {
     return result.rows;
 }
 
-export default { getFilteredProjects, getProjectById, getMilestonesByProjectId };
+async function getMilestonesDetailsByName(milestoneName) {
+    const query = `SELECT * FROM milestones WHERE title = $1`
+    const result = await pool.query(query, [milestoneName])
+    return result.rows[0]
+}
+
+export default { getFilteredProjects, getProjectById, getMilestonesByProjectId, getMilestonesDetailsByName };
 
