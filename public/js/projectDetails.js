@@ -1,3 +1,5 @@
+const ROOT_MILESTONE_NAME = "Start"
+
 document.addEventListener('DOMContentLoaded', function () {
     const milestonesElement = document.getElementById('milestoneData');
 
@@ -55,6 +57,16 @@ document.addEventListener('DOMContentLoaded', function () {
             .attr("class", "node")
             .attr("transform", d => `translate(${d.x},${d.y})`)
             .on("click", async (event, d) => {
+                if (d.data.name === ROOT_MILESTONE_NAME) {
+                    const sidebarContent = document.getElementById('sidebarContent');
+                    sidebarContent.innerHTML = `
+                        <h2>${d.data.name}</h2>
+                        <p>Some description here for first root milestone</p>
+                        <p><strong>Explanation:</strong> fill this in later on</p>
+                    `;
+                    document.getElementById('sidebar').classList.add("open")
+                    return
+                }
                 const currentPath = window.location.pathname;
 
                 try {
@@ -67,7 +79,6 @@ document.addEventListener('DOMContentLoaded', function () {
                             <h2>${data.milestoneDetails.title}</h2>
                             <p>${data.milestoneDetails.description}</p>
                             <p><strong>Explanation:</strong> ${data.milestoneDetails.explanation}</p>
-                            <!-- Add more details as necessary -->
                         `;
                         document.getElementById('sidebar').classList.add("open")
                     } else {
@@ -110,7 +121,7 @@ document.addEventListener('DOMContentLoaded', function () {
 });
 
 function transformData(milestones) {
-    const root = { name: "Start", children: [] };
+    const root = { name: ROOT_MILESTONE_NAME, children: [] };
     const lookup = {};
 
     milestones.forEach(milestone => {
