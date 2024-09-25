@@ -5,6 +5,6 @@ const projectsRouter = express.Router()
 
 projectsRouter.get('/', projectsController.getProjects)
 projectsRouter.get('/projects/:id', projectsController.getProjectDetails)
-projectsRouter.get('/projects/:id/:milestone', projectsController.getMilestoneDetails)
+projectsRouter.get('/projects/:id/:milestone', projectsController.getMilestoneDetailsJSON);
 
 export default projectsRouter

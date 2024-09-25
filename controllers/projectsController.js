@@ -22,21 +22,20 @@ async function getProjectDetails(req, res) {
     }
 }
 
-async function getMilestoneDetails(req, res) {
-    const { id, milestone } = req.params  
+async function getMilestoneDetailsJSON(req, res) {
+    const { id, milestone } = req.params;
     try {
-        const project = await db.getProjectById(id);
-        const milestones = await db.getMilestonesByProjectId(id);
-        const milestoneDetails = await db.getMilestonesDetailsByName(milestone)
+        const milestoneDetails = await db.getMilestonesDetailsByName(milestone);
+        
         if (milestoneDetails) {
-            res.render('projectDetails', { project, milestones, milestoneDetails });
+            res.json({ success: true, milestoneDetails });
         } else {
-            res.status(404).send('Milestone not found');
+            res.status(404).json({ success: false, message: 'Milestone not found' });
         }
     } catch (err) {
         console.error(err);
-        res.status(500).send('Server error');
+        res.status(500).json({ success: false, message: 'Server error' });
     }
 }
 
-export default { getProjects, getProjectDetails, getMilestoneDetails };
+export default { getProjects, getProjectDetails, getMilestoneDetailsJSON };

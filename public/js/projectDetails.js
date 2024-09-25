@@ -2,7 +2,7 @@ document.addEventListener('DOMContentLoaded', function () {
     const milestonesElement = document.getElementById('milestoneData');
 
     document.getElementById('closeSidebar').addEventListener('click', () => {
-        document.getElementById('sidebar').style.display = 'none';
+        document.getElementById('sidebar').classList.remove("open")
     });
 
     if (milestonesElement) {
@@ -54,9 +54,28 @@ document.addEventListener('DOMContentLoaded', function () {
             .append("g")
             .attr("class", "node")
             .attr("transform", d => `translate(${d.x},${d.y})`)
-            .on("click", (event, d) => {
+            .on("click", async (event, d) => {
                 const currentPath = window.location.pathname;
-                window.location.href = `${currentPath}/${d.data.name}`;
+
+                try {
+                    const response = await fetch(`${currentPath}/${d.data.name}`);
+                    const data = await response.json();
+    
+                    if (data.success) {
+                        const sidebarContent = document.getElementById('sidebarContent');
+                        sidebarContent.innerHTML = `
+                            <h2>${data.milestoneDetails.title}</h2>
+                            <p>${data.milestoneDetails.description}</p>
+                            <p><strong>Explanation:</strong> ${data.milestoneDetails.explanation}</p>
+                            <!-- Add more details as necessary -->
+                        `;
+                        document.getElementById('sidebar').classList.add("open")
+                    } else {
+                        alert(data.message);
+                    }
+                } catch (err) {
+                    console.error('Error fetching milestone details:', err);
+                }
             });
 
         // Add rectangles to the nodes with dynamic width and padding

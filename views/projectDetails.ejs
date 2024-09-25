@@ -1,14 +1,10 @@
 <!-- Sidebar for displaying milestone details -->
-<% if (milestoneDetails) { %>
-    <div id="sidebar" class="sidebar">
-        <button id="closeSidebar" class="close-btn">&times;</button>
-        <div id="sidebarContent">
-                <h3><%= milestoneDetails.title %></h3>
-                <p><strong>Description:</strong> <%= milestoneDetails.description %></p>
-                <p><strong>Explanation:</strong> <%= milestoneDetails.explanation %></p>
-        </div>
+<div id="sidebar" class="sidebar">
+    <button id="closeSidebar" class="close-btn">&times;</button>
+    <div id="sidebarContent">
+        <!-- This will be populated dynamically -->
     </div>
-<% } %>
+</div>
 
 <!DOCTYPE html>
 <html lang="en">
