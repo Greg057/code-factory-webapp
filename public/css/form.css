@@ -57,7 +57,7 @@
 
 /* Submit Button */
 .filter-bar button {
-    background-color: #ff5a5f;
+    background-color: var(--primary);
     color: #ffffff;
     padding: 12px 24px;
     margin: 0 12px;
@@ -70,7 +70,7 @@
 }
 
 .filter-bar button:hover {
-    background-color: #e54850;
+    background-color: var(--primary);
 }
 
 /* Filter Options (Initially Hidden) */

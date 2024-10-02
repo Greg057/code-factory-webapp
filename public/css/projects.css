@@ -30,7 +30,7 @@
     border-radius: 8px;
     box-shadow: 0 4px 8px rgba(0, 0, 0, 0.1);
     transition: box-shadow 0.3s ease, transform 0.3s ease;
-    border-left: 4px solid #ff5a5f;
+    border-left: 4px solid var(--primary);
 }
 
 /* Project Item Hover Effect */
@@ -42,7 +42,7 @@
 /* Project Title */
 .project-title {
     font-size: 18px;
-    color: #ff5a5f;
+    color: var(--primary);
     margin: 0 0 10px;
     font-weight: 600;
 }
@@ -63,7 +63,7 @@
 
 /* Highlighted Strong Tags */
 .project-interest strong, .project-skill-level strong {
-    color: #ff5a5f;
+    color: var(--primary);
     font-weight: 600;
 }
 

@@ -26,7 +26,7 @@
 }
 
 .header-title:hover {
-    color: #ff5a5f;
+    color: var(--primary);
 }
 
 /* Navigation */
@@ -46,6 +46,6 @@
 }
 
 .nav-link:hover {
-    background-color: #ff5a5f;
+    background-color: var(--primary);
     color: #fff;
 }

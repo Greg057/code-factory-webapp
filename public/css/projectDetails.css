@@ -2,7 +2,7 @@
 body {
   margin: 0;
   padding: 0;
-  background-color: rgb(233, 233, 233);
+  background-color: var(--background);
   box-sizing: border-box;
   font-family: system-ui, -apple-system, BlinkMacSystemFont, 'Segoe UI', Roboto, Oxygen, Ubuntu, Cantarell, 'Open Sans', 'Helvetica Neue', sans-serif;
 }
@@ -14,7 +14,7 @@ body {
   right: 0;
   width: 40%; /* Adjust width as needed */
   height: 100%;
-  background-color: #fff;
+  background-color: rgb(255, 255, 255);
   box-shadow: -2px 0 5px rgba(0, 0, 0, 0.2);
   transform: translateX(100%);
   z-index: 1000; /* Ensure the sidebar is above other content */
@@ -55,7 +55,7 @@ body {
 
 .project-title {
   font-size: 26px;
-  color: #ff5a5f;
+  color: var(--primary);
   margin-bottom: 10px;
 }
 
@@ -78,6 +78,7 @@ body {
 .milestone-title {
   font-size: 22px;
   color: #333;
+  font-weight: bold;
   margin-bottom: 15px;
 }
 
@@ -95,7 +96,7 @@ body {
   display: inline-block;
   margin-top: 30px;
   font-size: 16px;
-  color: #ff5a5f;
+  color: var(--primary);
   text-decoration: none;
 }
 
@@ -107,24 +108,22 @@ body {
   cursor: pointer;
 }
 
-/* Styling for the tree nodes */
 .node rect {
-  fill: #e0f7fa;       /* Light blue background for nodes */
-  stroke: #333;        /* Dark border for rectangles */
-  stroke-width: 2px;   /* Thickness of the rectangle borders */
+  fill: var(--primary);     
+  stroke: #333;      
+  stroke-width: 2px; 
 }
 
-/* Text inside the nodes */
 .node text {
-  font: 12px Arial, sans-serif;
-  fill: #333;         /* Dark text color for better contrast */
-  text-anchor: middle; /* Center the text inside the node */
+  font-size: 12px;
+  font-weight: bold;
+  fill: #f1f1f1;    
+  text-anchor: middle; 
 }
 
-/* Styling for the links (curvy lines) between nodes */
 .link {
-  fill: none;          /* No fill for links, just strokes */
-  stroke: #333;        /* Dark gray lines for links */
-  stroke-width: 2px;   /* Thickness of the lines */
+  fill: none;
+  stroke: #333;
+  stroke-width: 2px;  
 }
 

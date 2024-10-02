@@ -45,9 +45,6 @@ document.addEventListener('DOMContentLoaded', function () {
             .append("path")
             .attr("class", "link")
             .attr("d", diagonal) // Use the diagonal generator for curvy links
-            .style("fill", "none") // Ensure the path has no fill
-            .style("stroke", "#333") // Link color
-            .style("stroke-width", "2px"); // Link thickness
 
         // Add the nodes (rectangles)
         const node = svg.selectAll(".node")
@@ -91,32 +88,18 @@ document.addEventListener('DOMContentLoaded', function () {
 
         // Add rectangles to the nodes with dynamic width and padding
         node.append("rect")
-            .attr("width", d => Math.max(minWidth, calculateTextWidth(d.data.name) + 20)) // Padding added for text
+            .attr("width", d => Math.max(minWidth, calculateTextWidth(d.data.name) + 40)) // Padding added for text
             .attr("height", 40)
             .attr("rx", 10)
             .attr("ry", 10)
-            .attr("x", d => -Math.max(minWidth, calculateTextWidth(d.data.name) + 20) / 2)
+            .attr("x", d => -Math.max(minWidth, calculateTextWidth(d.data.name) + 40) / 2)
             .attr("y", -20)
-            .style("fill", "#e0f7fa") // Light background for better contrast
-            .style("stroke", "#333")  // Dark border for rectangles
-            .style("stroke-width", "2px")
             
-
         // Add text to the rectangles
         node.append("text")
             .attr("dy", ".35em")
             .attr("x", 0)
-            .style("text-anchor", "middle")
-            .style("fill", "#333")  // Dark text color for visibility
             .text(d => d.data.name)
-            .each(function (d) {
-                // If text is too wide, reduce font size to fit
-                const textWidth = calculateTextWidth(d.data.name);
-                const rectWidth = Math.max(minWidth, textWidth + 20);
-                if (textWidth > rectWidth - 20) {
-                    d3.select(this).style("font-size", "10px"); // Adjust font size if overflowing
-                }
-            });
     }
 });
 
