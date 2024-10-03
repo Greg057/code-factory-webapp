@@ -1,6 +1,6 @@
 import express from 'express'
 import projectsRouter from './routes/projectsRouter.js'
-import aboutRouter from './routes/aboutRouter.js'
+import pageRouter from './routes/pageRouter.js'
 
 const app = express()
 
@@ -10,6 +10,6 @@ app.set("view engine", "ejs")
 app.set("views", "views")
 
 app.use("/", projectsRouter)
-app.use("/about", aboutRouter)
+app.use("/page/", pageRouter)
 
 app.listen(8000, () => console.log("server started"))
