@@ -58,3 +58,37 @@ body {
 .cta-link:hover {
     background-color: var(--hover);
 }
+
+@media (max-width: 750px) {
+    .about-container {
+        max-width: 70%;
+    }
+}
+
+@media (max-width: 600px) {
+    .about-container {
+        max-width: 80%;
+    }
+}
+
+@media (max-width: 450px) {
+    .about-container {
+        max-width: 90%;
+    }
+
+    .about-container h1 {
+        font-size: 1.5em;
+        margin-bottom: 12px;
+    }
+    
+    .about-container h2 {
+        font-size: 1em;
+        margin-top: 30px;
+    }
+    
+    .about-container p, 
+    .about-container ul {
+        font-size: 0.8em;
+        line-height: 1.5;
+    }
+}
