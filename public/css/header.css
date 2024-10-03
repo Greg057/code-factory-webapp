@@ -1,9 +1,8 @@
 /* Header Container */
 .header {
     background-color: #f9f9f9;
-    padding: 20px 0;
+    padding: 16px 0;
     box-shadow: 0 2px 10px rgba(0, 0, 0, 0.1);
-    margin-bottom: 20px;
 }
 
 /* Inner Container */
@@ -13,7 +12,6 @@
     align-items: center;
     max-width: 90%;
     margin: 0 auto;
-    padding: 0 20px;
 }
 
 /* Header Title */
@@ -54,4 +52,29 @@
     .header-nav {
         gap: 0px;
     }
+}
+
+@media (max-width: 520px) {
+    .nav-link {
+        padding: 10px 10px;
+
+    }
+
+    .header .container {
+        max-width: 100%;
+        padding-left: 6px;
+    }
+}
+
+@media (max-width: 450px) {
+    .nav-link {
+        padding: 10px 6px;
+        font-size: 14px;
+
+    }
+
+    .header-title {
+        font-size: 22px;
+    }
+
 }
