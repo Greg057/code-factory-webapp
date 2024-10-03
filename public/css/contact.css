@@ -25,35 +25,9 @@ body {
     color: var(--text-color);
 }
 
-.about-container p,
-.about-container ul {
+.about-container p {
     font-size: 1em;
     line-height: 1.5;
-}
-
-.about-container ul {
-    margin-top: 10px;
-    padding-left: 20px;
-}
-
-.about-container ul li {
-    margin-bottom: 10px;
-}
-
-/* Call-to-Action Link */
-.cta-link {
-    display: inline-block;
-    padding: 10px 16px;
-    background-color: var(--primary);
-    color: #ffffff;
-    text-decoration: none;
-    border-radius: 4px;
-    transition: background-color 0.3s ease;
-    margin-top: 20px;
-}
-
-.cta-link:hover {
-    background-color: #2a44a2;
 }
 
 /* Instagram Icon */

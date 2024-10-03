@@ -56,5 +56,5 @@ body {
 }
 
 .cta-link:hover {
-    background-color: #2a44a2;
+    background-color: var(--hover);
 }

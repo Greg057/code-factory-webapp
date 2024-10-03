@@ -20,7 +20,7 @@ document.querySelectorAll('.filter-by').forEach(filterOption => {
 
 document.addEventListener('DOMContentLoaded', () => {
     // Function to update the filter text
-    function updateFilterText() {
+    function updateFilterText(divName) {
         const interestText = document.querySelector('#filter-by-interest .filter-text');
         const skillLevelText = document.querySelector('#filter-by-skill-level .filter-text');
         
@@ -33,11 +33,28 @@ document.addEventListener('DOMContentLoaded', () => {
         const skillLevelSelect = document.querySelector('#skill-options select');
         const selectedSkillLevel = skillLevelSelect.options[skillLevelSelect.selectedIndex].text;
         skillLevelText.textContent = selectedSkillLevel === 'All skill levels' ? 'All skill levels' : selectedSkillLevel;
+
+        document.querySelector(divName).style.display = 'none';
     }
 
     // Attach event listener to interest select
-    document.querySelector('#interest-select').addEventListener('change', updateFilterText);
+    document.querySelector('#interest-options').addEventListener('change', () => updateFilterText('#interest-options'));
 
     // Attach event listener to skill level select
-    document.querySelector('#skill-options select').addEventListener('change', updateFilterText);
+    document.querySelector('#skill-options').addEventListener('change', () => updateFilterText('#skill-options'));
 });
+
+function updateButtonText() {
+    const button = document.getElementById('apply-filters-btn');
+    if (window.innerWidth < 491) {
+        button.textContent = 'Apply';
+    } else {
+        button.textContent = 'Apply Filters';
+    }
+}
+
+// Update on load
+updateButtonText();
+
+// Update on resize
+window.addEventListener('resize', updateButtonText);
