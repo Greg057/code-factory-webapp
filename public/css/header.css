@@ -49,3 +49,9 @@
     background-color: var(--primary);
     color: #fff;
 }
+
+@media (max-width: 585px) {
+    .header-nav {
+        gap: 0px;
+    }
+}
