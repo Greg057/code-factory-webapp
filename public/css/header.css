@@ -5,6 +5,12 @@
     box-shadow: 0 2px 10px rgba(0, 0, 0, 0.1);
 }
 
+.header-logo {
+    height: 40px; /* Adjust height as needed */
+    margin-right: 10px; /* Space between logo and title */
+    vertical-align: middle; /* Aligns the logo with the text */
+}
+
 /* Inner Container */
 .header .container {
     display: flex;
@@ -48,13 +54,15 @@
     color: #fff;
 }
 
-@media (max-width: 585px) {
+@media (max-width: 670px) {
     .header-nav {
         gap: 0px;
     }
-}
 
-@media (max-width: 520px) {
+    .header {
+        padding: 12px;
+    }
+
     .nav-link {
         padding: 10px 10px;
 
@@ -62,7 +70,6 @@
 
     .header .container {
         max-width: 100%;
-        padding-left: 6px;
     }
 }
 
@@ -72,9 +79,4 @@
         font-size: 14px;
 
     }
-
-    .header-title {
-        font-size: 22px;
-    }
-
 }
