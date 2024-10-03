@@ -1,4 +1,4 @@
-const ROOT_MILESTONE_NAME = "Start"
+const ROOT_MILESTONE_NAME = "Initial Setup"
 
 document.addEventListener('DOMContentLoaded', function () {
     const milestonesElement = document.getElementById('milestoneData');
@@ -20,7 +20,7 @@ document.addEventListener('DOMContentLoaded', function () {
             return context.measureText(text).width;
         }
 
-        const width = 1000, height = 600;
+        const width = 1400, height = 500;
         const svg = d3.select("#milestoneTree")
             .attr("width", width)
             .attr("height", height)
@@ -88,11 +88,11 @@ document.addEventListener('DOMContentLoaded', function () {
 
         // Add rectangles to the nodes with dynamic width and padding
         node.append("rect")
-            .attr("width", d => Math.max(minWidth, calculateTextWidth(d.data.name) + 40)) // Padding added for text
+            .attr("width", d => Math.max(minWidth, calculateTextWidth(d.data.name) + 60)) // Padding added for text
             .attr("height", 40)
             .attr("rx", 10)
             .attr("ry", 10)
-            .attr("x", d => -Math.max(minWidth, calculateTextWidth(d.data.name) + 40) / 2)
+            .attr("x", d => -Math.max(minWidth, calculateTextWidth(d.data.name) + 60) / 2)
             .attr("y", -20)
             
         // Add text to the rectangles

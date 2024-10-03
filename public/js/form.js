@@ -27,12 +27,12 @@ document.addEventListener('DOMContentLoaded', () => {
         // Get selected interest
         const interestSelect = document.querySelector('#interest-select');
         const selectedInterest = interestSelect.options[interestSelect.selectedIndex].text;
-        interestText.textContent = selectedInterest === 'Select interest' ? 'Select interest' : selectedInterest;
+        interestText.textContent = selectedInterest === 'All interests' ? 'All interests' : selectedInterest;
         
         // Update skill level filter text
         const skillLevelSelect = document.querySelector('#skill-options select');
         const selectedSkillLevel = skillLevelSelect.options[skillLevelSelect.selectedIndex].text;
-        skillLevelText.textContent = selectedSkillLevel === 'Select skill level' ? 'Select skill level' : selectedSkillLevel;
+        skillLevelText.textContent = selectedSkillLevel === 'All skill levels' ? 'All skill levels' : selectedSkillLevel;
     }
 
     // Attach event listener to interest select

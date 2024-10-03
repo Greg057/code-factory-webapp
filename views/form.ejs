@@ -2,11 +2,11 @@
     <div class="filter-bar">
         <div class="filter-by" id="filter-by-interest" data-target="interest-options">
             <h4 class="filter-header">Interest</h4>
-            <h6 class="filter-text"><%= interest ? interest : 'Select interest'%></h6>
+            <h6 class="filter-text"><%= interest ? interest : 'All interests'%></h6>
         </div>
         <div class="filter-by" id="filter-by-skill-level" data-target="skill-options">
             <h4 class="filter-header">Skill Level</h4>
-            <h6 class="filter-text"><%= skillLevel ? skillLevel : 'Select skill level'%></h6>
+            <h6 class="filter-text"><%= skillLevel ? skillLevel : 'All skill levels'%></h6>
         </div>
         <button type="submit">Apply Filters</button>
     </div>
@@ -14,7 +14,7 @@
     <!-- Interest Filter Options -->
     <div class="filter-options" id="interest-options">
         <select name="interest" id="interest-select">
-            <option value="">Select an interest</option>
+            <option value="">All interests</option>
             <option value="Web Development" <%= (interest === 'Web Development') ? 'selected' : '' %>>Web Development</option>
             <option value="Mobile Development" <%= (interest === 'Mobile Development') ? 'selected' : '' %>>Mobile Development</option>
             <option value="Cybersecurity" <%= (interest === 'Cybersecurity') ? 'selected' : '' %>>Cybersecurity</option>
@@ -29,7 +29,7 @@
     <!-- Skill Level Filter Options -->
     <div class="filter-options" id="skill-options">
         <select name="skillLevel">
-            <option value="">Select skill level</option>
+            <option value="">All skill levels</option>
             <option value="Beginner" <%= (skillLevel === 'Beginner') ? 'selected' : '' %>>Beginner</option>
             <option value="Intermediate" <%= (skillLevel === 'Intermediate') ? 'selected' : '' %>>Intermediate</option>
             <option value="Advanced" <%= (skillLevel === 'Advanced') ? 'selected' : '' %>>Advanced</option>
