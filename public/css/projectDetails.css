@@ -124,15 +124,29 @@ body {
   stroke-width: 2px;  
 }
 
+@media (max-width: 1110px) {
+  .sidebar {
+    width: 50%;
+  }
+}
+
 @media (max-width: 887px) {
   .milestone-title {
     font-size: 18px;
   }
+
+  .sidebar {
+    width: 60%;
+  }
 }
 
-@media (max-width: 490px) {
+@media (max-width: 500px) {
   .milestone-title {
     font-size: 16px;
+  }
+
+  .sidebar {
+    width: 100%;
   }
 }
 
