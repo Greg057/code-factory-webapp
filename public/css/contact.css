@@ -30,7 +30,7 @@ body {
 }
 
 /* Instagram Icon */
-img {
+.contact-container img {
     display: inline-block;
     margin-right: 5px; /* Space between the icon and text */
     vertical-align: middle; /* Align icon with the text */
