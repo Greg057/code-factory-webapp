@@ -75,8 +75,6 @@ document.addEventListener('DOMContentLoaded', function () {
         // Set the initial translate to center the tree horizontally within the container
         const initialTranslateX = (containerWidth - treeWidth * zoomScale) / 2 - minX * zoomScale;
 
-        console.log('initialTranslateX: ', initialTranslateX)
-
         // Set the initial zoom transformation to center the entire tree with scaling
         const initialTransform = d3.zoomIdentity
             .translate(initialTranslateX, 50)
