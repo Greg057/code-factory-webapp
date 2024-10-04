@@ -80,21 +80,15 @@ body {
   margin-top: 30px;
 }
 
+#milestoneTree {
+  cursor: grab; /* Changes cursor to indicate the user can drag the SVG */
+}
+
 .milestone-title {
   font-size: 22px;
   color: #333;
   font-weight: bold;
   margin-bottom: 15px;
-}
-
-.milestone-container {
-  overflow-x: auto;
-  padding: 10px;
-}
-
-#milestoneTree {
-  width: 100%;
-  height: 500px;
 }
 
 .back-link {
@@ -114,9 +108,7 @@ body {
 }
 
 .node rect {
-  fill: var(--primary);     
-  stroke: #333;      
-  stroke-width: 2px; 
+  fill: var(--primary);      
 }
 
 .node text {
@@ -130,5 +122,17 @@ body {
   fill: none;
   stroke: #333;
   stroke-width: 2px;  
+}
+
+@media (max-width: 887px) {
+  .milestone-title {
+    font-size: 18px;
+  }
+}
+
+@media (max-width: 490px) {
+  .milestone-title {
+    font-size: 16px;
+  }
 }
 

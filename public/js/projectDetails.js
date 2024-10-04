@@ -1,4 +1,5 @@
-const ROOT_MILESTONE_NAME = "Initial Setup"
+const ROOT_MILESTONE_NAME = "Initial Setup";
+const WIDTH = 1200;
 
 document.addEventListener('DOMContentLoaded', function () {
     const milestonesElement = document.getElementById('milestoneData');
@@ -20,18 +21,71 @@ document.addEventListener('DOMContentLoaded', function () {
             return context.measureText(text).width;
         }
 
-        const width = 1400, height = 500;
-        const svg = d3.select("#milestoneTree")
-            .attr("width", width)
-            .attr("height", height)
-            .append("g")
-            .attr("transform", "translate(50, 50)");
+        // Create the tree layout
+        const root = d3.hierarchy(milestones);
+
+        // Determine the number of levels (depth) in the tree
+        const numLevels = root.height + 1; // `root.height` gives the number of edges from root to deepest leaf, so add 1 for the root level
+        const treeHeight = numLevels * 100;
+
+        // Clear any existing SVG elements
+        const svgContainer = d3.select("#milestoneTree");
+        svgContainer.selectAll("*").remove();
+
+        // Create an SVG group to hold the entire tree structure
+        const svg = svgContainer
+            .attr("width", WIDTH + 100)
+            .attr("height", treeHeight + 100);
+
+        const svgGroup = svg.append("g");
+
+        // Create zoom behavior
+        const zoom = d3.zoom()
+            .scaleExtent([0.2, 4]) // Allow zoom between 20% and 400%
+            .on("zoom", (event) => {
+                svgGroup.attr("transform", event.transform);
+            });
+
+        // Apply the zoom behavior to the SVG container
+        svgContainer.call(zoom);
 
         const treeLayout = d3.tree()
-            .size([width - 100, height - 100]);
+            .size([WIDTH, treeHeight]);
 
-        const root = d3.hierarchy(milestones);
         treeLayout(root);
+
+        const containerWidth = document.querySelector('.milestone-container').clientWidth;
+
+        // Function to calculate the tree width based on the node positions
+        function calculateTreeWidth() {
+            const nodes = root.descendants();
+            const minX = d3.min(nodes, d => d.x);
+            const maxX = d3.max(nodes, d => d.x);
+            return { minX, maxX, width: maxX - minX };
+        }
+
+        // Calculate tree width and adjust the initial zoom to fit the container
+        const { minX, width: treeWidth } = calculateTreeWidth();
+        let zoomScale = 1;
+
+        if (treeWidth + 200 > containerWidth) {
+            zoomScale = containerWidth / (treeWidth + 200);
+        }
+
+        // Set the initial translate to center the tree horizontally within the container
+        const initialTranslateX = (containerWidth - treeWidth * zoomScale) / 2 - minX * zoomScale;
+
+        console.log('initialTranslateX: ', initialTranslateX)
+
+        // Set the initial zoom transformation to center the entire tree with scaling
+        const initialTransform = d3.zoomIdentity
+            .translate(initialTranslateX, 50)
+            .scale(zoomScale);
+
+        // Apply the default zoom transformation to center and fit the tree
+        svgContainer.call(zoom.transform, initialTransform);
+
+        
 
         // Create a diagonal path generator for the links
         const diagonal = d3.linkVertical()
@@ -39,7 +93,7 @@ document.addEventListener('DOMContentLoaded', function () {
             .y(d => d.y);
 
         // Add links between nodes
-        svg.selectAll(".link")
+        svgGroup.selectAll(".link")
             .data(root.links())
             .enter()
             .append("path")
@@ -47,7 +101,7 @@ document.addEventListener('DOMContentLoaded', function () {
             .attr("d", diagonal) // Use the diagonal generator for curvy links
 
         // Add the nodes (rectangles)
-        const node = svg.selectAll(".node")
+        const node = svgGroup.selectAll(".node")
             .data(root.descendants())
             .enter()
             .append("g")
@@ -88,18 +142,18 @@ document.addEventListener('DOMContentLoaded', function () {
 
         // Add rectangles to the nodes with dynamic width and padding
         node.append("rect")
-            .attr("width", d => Math.max(minWidth, calculateTextWidth(d.data.name) + 60)) // Padding added for text
+            .attr("width", d => Math.max(minWidth, calculateTextWidth(d.data.name) + 60))
             .attr("height", 40)
             .attr("rx", 10)
             .attr("ry", 10)
             .attr("x", d => -Math.max(minWidth, calculateTextWidth(d.data.name) + 60) / 2)
-            .attr("y", -20)
-            
+            .attr("y", -20);
+
         // Add text to the rectangles
         node.append("text")
             .attr("dy", ".35em")
             .attr("x", 0)
-            .text(d => d.data.name)
+            .text(d => d.data.name);
     }
 });
 
