@@ -1,4 +1,3 @@
-const ROOT_MILESTONE_NAME = "Initial Setup";
 const WIDTH = 1200;
 
 document.addEventListener('DOMContentLoaded', function () {
@@ -106,61 +105,6 @@ document.addEventListener('DOMContentLoaded', function () {
             .attr("class", "node")
             .attr("transform", d => `translate(${d.x},${d.y})`)
             .on("click", async (event, d) => {
-                if (d.data.name === ROOT_MILESTONE_NAME) {
-                    const sidebarContent = document.getElementById('sidebarContent');
-                    sidebarContent.innerHTML = `
-                        <h2 class="milestone-detail-title">
-                            ${d.data.name} <span class="emoji">🔧</span>
-                        </h2>
-                        <p class="milestone-detail-description">
-                            Set up your development environment and configure basic tools and dependencies. This step ensures that your project starts with a solid foundation.
-                        </p>
-
-                        <div class="milestone-detail-section">
-                            <p class="milestone-detail-heading"><strong>📜 Explanation:</strong></p>
-                            <p>
-                                The initial setup involves preparing your environment by installing necessary tools and libraries. This could include version control (Git), package managers, code editors, and other technologies that you need to start the project smoothly.
-                            </p>
-                        </div>
-
-                        <div class="milestone-detail-section">
-                            <p class="milestone-detail-heading"><strong>🎯 Objectives:</strong></p>
-                            <p>
-                                Install all necessary software and tools, set up version control for collaboration and history tracking, and ensure that all dependencies are installed and running correctly.
-                            </p>
-                        </div>
-
-                        <div class="milestone-detail-section">
-                            <p class="milestone-detail-heading"><strong>📚 Resources:</strong></p>
-                            <p>
-                                Refer to the official documentation of the frameworks or libraries you're using. Setup guides from reputable online resources like MDN, Stack Overflow, or tutorials on YouTube can be very helpful. Additionally, use GitHub or Bitbucket for version control.
-                            </p>
-                        </div>
-
-                        <div class="milestone-detail-section">
-                            <p class="milestone-detail-heading"><strong>🛠 Skills Involved:</strong></p>
-                            <p>
-                                You'll work on environment setup and configuration, version control management, and basic understanding of command-line tools.
-                            </p>
-                        </div>
-
-                        <div class="milestone-detail-section">
-                            <p class="milestone-detail-heading"><strong>💡 Tips for Success:</strong></p>
-                            <p>
-                                Follow official documentation to avoid common pitfalls. Test each installation step to ensure everything works before moving on. Set up a README file for project documentation right from the beginning to help track changes and share progress.
-                            </p>
-                        </div>
-
-                        <div class="milestone-detail-section">
-                            <p class="milestone-detail-heading"><strong>❗ Challenges & Risks:</strong></p>
-                            <p>
-                                Be aware of potential challenges like incompatible versions of software or dependencies causing issues, missing environment variables or incorrect configurations that can lead to runtime errors, and overcomplicating the setup—start simple and add tools as needed.
-                            </p>
-                        </div>
-                    `;
-                    document.getElementById('sidebar').classList.add("open")
-                    return
-                }
                 const currentPath = window.location.pathname;
 
                 try {
@@ -232,27 +176,36 @@ document.addEventListener('DOMContentLoaded', function () {
 });
 
 function transformData(milestones) {
-    const root = { name: ROOT_MILESTONE_NAME, children: [] };
+    // Create a lookup for all milestones based on their ID
     const lookup = {};
-
     milestones.forEach(milestone => {
         lookup[milestone.id] = { 
             name: milestone.title, 
-            children: [] 
+            children: [] // Initialize with an empty array to store linked children
         };
     });
 
+    // Initialize the root milestone
+    const root = { name: milestones[0].title, children: [] }; // Use the first milestone as root
+
+    // Build the tree structure
     milestones.forEach(milestone => {
-        if (milestone.dependencies.length === 0) {
+        // For each child ID in the milestone's children array, push the corresponding milestone to its parent's children
+        milestone.children.forEach(childId => {
+            if (lookup[childId]) {
+                lookup[milestone.id].children.push(lookup[childId]);
+            }
+        });
+
+        // If the milestone is the root, add it to the root's children
+        if (milestone.id === milestones[0].id) {
             root.children.push(lookup[milestone.id]);
-        } else {
-            milestone.dependencies.forEach(depId => {
-                if (lookup[depId]) {
-                    lookup[depId].children.push(lookup[milestone.id]);
-                }
-            });
         }
     });
 
     return root;
 }
+
+
+
+
