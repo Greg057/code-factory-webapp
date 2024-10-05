@@ -109,9 +109,54 @@ document.addEventListener('DOMContentLoaded', function () {
                 if (d.data.name === ROOT_MILESTONE_NAME) {
                     const sidebarContent = document.getElementById('sidebarContent');
                     sidebarContent.innerHTML = `
-                        <h2>${d.data.name}</h2>
-                        <p>Some description here for first root milestone</p>
-                        <p><strong>Explanation:</strong> fill this in later on</p>
+                        <h2 class="milestone-detail-title">
+                            ${d.data.name} <span class="emoji">🔧</span>
+                        </h2>
+                        <p class="milestone-detail-description">
+                            Set up your development environment and configure basic tools and dependencies. This step ensures that your project starts with a solid foundation.
+                        </p>
+
+                        <div class="milestone-detail-section">
+                            <p class="milestone-detail-heading"><strong>📜 Explanation:</strong></p>
+                            <p>
+                                The initial setup involves preparing your environment by installing necessary tools and libraries. This could include version control (Git), package managers, code editors, and other technologies that you need to start the project smoothly.
+                            </p>
+                        </div>
+
+                        <div class="milestone-detail-section">
+                            <p class="milestone-detail-heading"><strong>🎯 Objectives:</strong></p>
+                            <p>
+                                Install all necessary software and tools, set up version control for collaboration and history tracking, and ensure that all dependencies are installed and running correctly.
+                            </p>
+                        </div>
+
+                        <div class="milestone-detail-section">
+                            <p class="milestone-detail-heading"><strong>📚 Resources:</strong></p>
+                            <p>
+                                Refer to the official documentation of the frameworks or libraries you're using. Setup guides from reputable online resources like MDN, Stack Overflow, or tutorials on YouTube can be very helpful. Additionally, use GitHub or Bitbucket for version control.
+                            </p>
+                        </div>
+
+                        <div class="milestone-detail-section">
+                            <p class="milestone-detail-heading"><strong>🛠 Skills Involved:</strong></p>
+                            <p>
+                                You'll work on environment setup and configuration, version control management, and basic understanding of command-line tools.
+                            </p>
+                        </div>
+
+                        <div class="milestone-detail-section">
+                            <p class="milestone-detail-heading"><strong>💡 Tips for Success:</strong></p>
+                            <p>
+                                Follow official documentation to avoid common pitfalls. Test each installation step to ensure everything works before moving on. Set up a README file for project documentation right from the beginning to help track changes and share progress.
+                            </p>
+                        </div>
+
+                        <div class="milestone-detail-section">
+                            <p class="milestone-detail-heading"><strong>❗ Challenges & Risks:</strong></p>
+                            <p>
+                                Be aware of potential challenges like incompatible versions of software or dependencies causing issues, missing environment variables or incorrect configurations that can lead to runtime errors, and overcomplicating the setup—start simple and add tools as needed.
+                            </p>
+                        </div>
                     `;
                     document.getElementById('sidebar').classList.add("open")
                     return
@@ -125,9 +170,40 @@ document.addEventListener('DOMContentLoaded', function () {
                     if (data.success) {
                         const sidebarContent = document.getElementById('sidebarContent');
                         sidebarContent.innerHTML = `
-                            <h2>${data.milestoneDetails.title}</h2>
-                            <p>${data.milestoneDetails.description}</p>
-                            <p><strong>Explanation:</strong> ${data.milestoneDetails.explanation}</p>
+                            <h2 class="milestone-detail-title">
+                                ${data.milestoneDetails.title}
+                            </h2>
+                            <p class="milestone-detail-description">${data.milestoneDetails.description}</p>
+
+                            <div class="milestone-detail-section">
+                                <p class="milestone-detail-heading"><strong>📜 Explanation:</strong></p>
+                                <p>${data.milestoneDetails.explanation}</p>
+                            </div>
+
+                            <div class="milestone-detail-section">
+                                <p class="milestone-detail-heading"><strong>🎯 Objectives:</strong></p>
+                                <p>${data.milestoneDetails.objectives}</p>
+                            </div>
+
+                            <div class="milestone-detail-section">
+                                <p class="milestone-detail-heading"><strong>📚 Resources:</strong></p>
+                                <p>${data.milestoneDetails.resources}</p>
+                            </div>
+
+                            <div class="milestone-detail-section">
+                                <p class="milestone-detail-heading"><strong>🛠 Skills Involved:</strong></p>
+                                <p>${data.milestoneDetails.skills_involved}</p>
+                            </div>
+
+                            <div class="milestone-detail-section">
+                                <p class="milestone-detail-heading"><strong>💡 Tips for Success:</strong></p>
+                                <p>${data.milestoneDetails.tips_for_success}</p>
+                            </div>
+
+                            <div class="milestone-detail-section">
+                                <p class="milestone-detail-heading"><strong>❗ Challenges & Risks:</strong></p>
+                                <p>${data.milestoneDetails.challenges_and_risks}</p>
+                            </div>
                         `;
                         document.getElementById('sidebar').classList.add("open")
                     } else {
