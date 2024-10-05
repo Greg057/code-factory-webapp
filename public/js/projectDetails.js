@@ -185,26 +185,31 @@ function transformData(milestones) {
         };
     });
 
-    // Initialize the root milestone
-    const root = { name: milestones[0].title, children: [] }; // Use the first milestone as root
+    // Initialize the root milestone (first milestone in the array)
+    const root = { name: milestones[0].title, children: [] };
 
     // Build the tree structure
     milestones.forEach(milestone => {
-        // For each child ID in the milestone's children array, push the corresponding milestone to its parent's children
+        // Link each child milestone to its parent based on the children array
         milestone.children.forEach(childId => {
             if (lookup[childId]) {
                 lookup[milestone.id].children.push(lookup[childId]);
             }
         });
+    });
 
-        // If the milestone is the root, add it to the root's children
-        if (milestone.id === milestones[0].id) {
-            root.children.push(lookup[milestone.id]);
+    // Only add the children of the root milestone to the root node's children
+    const rootChildrenIds = milestones[0].children; // Get the children of the root milestone
+    rootChildrenIds.forEach(childId => {
+        if (lookup[childId]) {
+            root.children.push(lookup[childId]);
         }
     });
 
     return root;
 }
+
+
 
 
 
