@@ -91,7 +91,7 @@ body {
 }
 
 .node rect {
-  fill: var(--primary);      
+  fill: var(--primary);
 }
 
 .node text {

@@ -1,4 +1,4 @@
-const WIDTH = 1200;
+const WIDTH = 1600;
 
 document.addEventListener('DOMContentLoaded', function () {
     const milestonesElement = document.getElementById('milestoneData');
@@ -49,7 +49,8 @@ document.addEventListener('DOMContentLoaded', function () {
         svgContainer.call(zoom);
 
         const treeLayout = d3.tree()
-            .size([WIDTH, treeHeight]);
+            .size([WIDTH, treeHeight])
+            .nodeSize([275, 120]);
 
         treeLayout(root);
 
@@ -67,8 +68,8 @@ document.addEventListener('DOMContentLoaded', function () {
         const { minX, width: treeWidth } = calculateTreeWidth();
         let zoomScale = 1;
 
-        if (treeWidth + 200 > containerWidth) {
-            zoomScale = containerWidth / (treeWidth + 200);
+        if (treeWidth + 400 > containerWidth) {
+            zoomScale = containerWidth / (treeWidth + 400);
         }
 
         // Set the initial translate to center the tree horizontally within the container
@@ -106,6 +107,7 @@ document.addEventListener('DOMContentLoaded', function () {
             .attr("transform", d => `translate(${d.x},${d.y})`)
             .on("click", async (event, d) => {
                 const currentPath = window.location.pathname;
+                console.log("h")
 
                 try {
                     const response = await fetch(`${currentPath}/${d.data.name}`);
