@@ -107,7 +107,6 @@ document.addEventListener('DOMContentLoaded', function () {
             .attr("transform", d => `translate(${d.x},${d.y})`)
             .on("click", async (event, d) => {
                 const currentPath = window.location.pathname;
-                console.log("h")
 
                 try {
                     const response = await fetch(`${currentPath}/${d.data.name}`);

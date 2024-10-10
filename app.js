@@ -11,5 +11,9 @@ app.set("views", "views")
 
 app.use("/", projectsRouter)
 app.use("/page/", pageRouter)
+app.use((req, res, next) => {
+    res.status(404).render('404');
+});
+
 
 app.listen(8000, () => console.log("server started"))

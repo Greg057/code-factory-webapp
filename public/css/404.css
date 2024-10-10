@@ -1,0 +1,46 @@
+/* Container styling */
+.container {
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    height: 100vh;
+    text-align: center;
+    background-color: var(--background);
+}
+
+/* Wrapper for content */
+.not-found-wrapper {
+    padding: 40px;
+    border-radius: 8px;
+    max-width: 500px;
+    width: 100%;
+}
+
+/* Heading */
+.not-found-wrapper h1 {
+    font-size: 2em;
+    color: var(--primary);
+    margin-bottom: 20px;
+}
+
+/* Message text */
+.not-found-wrapper p {
+    font-size: 1em;
+    color: var(--text-color);
+    margin-bottom: 20px;
+}
+
+/* Back link button */
+.back-link {
+    display: inline-block;
+    padding: 10px 20px;
+    background-color: var(--primary);
+    color: #ffffff;
+    text-decoration: none;
+    border-radius: 4px;
+    transition: background-color 0.3s ease;
+}
+
+.back-link:hover {
+    background-color: var(--hover);
+}
