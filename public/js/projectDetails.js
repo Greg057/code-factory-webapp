@@ -1,4 +1,5 @@
 const WIDTH = 1600;
+const HEIGHT_PER_NODE = 100;
 
 document.addEventListener('DOMContentLoaded', function () {
     const milestonesElement = document.getElementById('milestoneData');
@@ -10,7 +11,13 @@ document.addEventListener('DOMContentLoaded', function () {
     if (milestonesElement) {
         const rawMilestones = JSON.parse(milestonesElement.getAttribute('data-milestones'));
         const milestones = transformData(rawMilestones);
+        const headerHeight = document.querySelector('.header').offsetHeight;
+        const projectHeaderHeight = document.querySelector('.project-header').offsetHeight;
+        const milestoneTitleHeight = document.querySelector('.milestone-title').offsetHeight;
 
+        // Calculate tree height based on 100vh minus the combined heights
+        const availableHeightForTree = window.innerHeight - headerHeight - projectHeaderHeight - milestoneTitleHeight;
+        
         const minWidth = 120;
 
         function calculateTextWidth(text) {
@@ -25,7 +32,7 @@ document.addEventListener('DOMContentLoaded', function () {
 
         // Determine the number of levels (depth) in the tree
         const numLevels = root.height + 1; // `root.height` gives the number of edges from root to deepest leaf, so add 1 for the root level
-        const treeHeight = numLevels * 100;
+        const treeHeight = numLevels * HEIGHT_PER_NODE;
 
         // Clear any existing SVG elements
         const svgContainer = d3.select("#milestoneTree");
@@ -33,8 +40,8 @@ document.addEventListener('DOMContentLoaded', function () {
 
         // Create an SVG group to hold the entire tree structure
         const svg = svgContainer
-            .attr("width", WIDTH + 100)
-            .attr("height", treeHeight + 100);
+            .attr("width", WIDTH)
+            .attr("height", treeHeight);
 
         const svgGroup = svg.append("g");
 
@@ -50,11 +57,9 @@ document.addEventListener('DOMContentLoaded', function () {
 
         const treeLayout = d3.tree()
             .size([WIDTH, treeHeight])
-            .nodeSize([275, 120]);
+            .nodeSize([275, HEIGHT_PER_NODE]);
 
         treeLayout(root);
-
-        const containerWidth = document.querySelector('.milestone-container').clientWidth;
 
         // Function to calculate the tree width based on the node positions
         function calculateTreeWidth() {
@@ -66,14 +71,21 @@ document.addEventListener('DOMContentLoaded', function () {
 
         // Calculate tree width and adjust the initial zoom to fit the container
         const { minX, width: treeWidth } = calculateTreeWidth();
+        
+        const milestoneContainerWidth = document.querySelector('.milestone-container').clientWidth;
         let zoomScale = 1;
+        if (treeWidth + 200 > milestoneContainerWidth) {
+            zoomScale = milestoneContainerWidth / (treeWidth + 300);
+        }
 
-        if (treeWidth + 400 > containerWidth) {
-            zoomScale = containerWidth / (treeWidth + 400);
+        // Adjust zoom scale if tree height exceeds container height
+        if (treeHeight + 50 > availableHeightForTree) {
+            const heightScale = availableHeightForTree / (treeHeight + 50);
+            zoomScale = Math.min(zoomScale, heightScale); // Use the smaller of the two scales
         }
 
         // Set the initial translate to center the tree horizontally within the container
-        const initialTranslateX = (containerWidth - treeWidth * zoomScale) / 2 - minX * zoomScale;
+        const initialTranslateX = (milestoneContainerWidth - treeWidth * zoomScale) / 2 - minX * zoomScale;
 
         // Set the initial zoom transformation to center the entire tree with scaling
         const initialTransform = d3.zoomIdentity
@@ -209,6 +221,9 @@ function transformData(milestones) {
 
     return root;
 }
+  
+  
+  
 
 
 
