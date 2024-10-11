@@ -65,10 +65,37 @@ body {
   margin: 0;
 }
 
-.project-info p {
-  font-size: 16px;
-  color: #333;
-  margin: 5px 0;
+.header-content {
+  display: flex;
+  align-items: center;
+  gap: 15px; /* Space between title and tags */
+}
+
+.project-tags {
+  display: flex;
+  gap: 10px; /* Space between each tag */
+}
+
+/* Tag styles with vibrant colors */
+.project-tags p {
+  padding: 5px 10px;
+  border-radius: 8px;
+  font-size: 14px;
+  font-weight: bold;
+  margin: 0;
+  color: #333333db;
+}
+
+/* Vibrant orange for interest tag */
+.project-interest {
+  border: 2px solid rgb(255, 137, 19); /* Bright orange border */
+  background-color: rgba(255, 153, 51, 0.3); /* Semi-transparent orange background */
+}
+
+/* Vibrant purple for skill tag */
+.project-skill {
+  border: 2px solid rgb(164, 73, 255); /* Bright purple border */
+  background-color: rgba(153, 51, 255, 0.3); /* Semi-transparent purple background */
 }
 
 .project-description {
@@ -159,6 +186,13 @@ body {
   }
 }
 
+@media (max-width: 1000px) {
+  .header-content {
+      flex-direction: column; /* Stack elements vertically */
+      align-items: flex-start; /* Align title and tags to the left */
+  }
+}
+
 @media (max-width: 887px) {
   .milestone-title {
     font-size: 18px;
@@ -176,6 +210,10 @@ body {
 
   .sidebar {
     width: 100%;
+  }
+
+  .project-tags p {
+    font-size: 12px;
   }
 }
 

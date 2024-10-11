@@ -14,10 +14,12 @@
         <%- include('header') %>
         <div class="container">
             <header class="project-header">
-                <h1 class="project-title"><%= project.title %></h1>
-                <div class="project-info">
-                    <p class="project-interest"><strong>Interest:</strong> <%= project.interest %></p>
-                    <p class="project-skill"><strong>Skill Level:</strong> <%= project.skill_level %></p>
+                <div class="header-content">
+                    <h1 class="project-title"><%= project.title %></h1>
+                    <div class="project-tags">
+                        <p class="project-interest"><%= project.interest %></p>
+                        <p class="project-skill"><%= project.skill_level %></p>
+                    </div>
                 </div>
                 <p class="project-description"><%= project.description %></p>
             </header>
