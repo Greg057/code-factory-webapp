@@ -1,4 +1,9 @@
 /* General Styles */
+html, body {
+  height: 100%;
+  overflow: hidden;
+}
+
 body {
   margin: 0;
   padding: 0;
@@ -9,7 +14,7 @@ body {
 }
 
 .full-page {
-  height: 100vh;
+  height: 100dvh;
   overflow: hidden; /* Hide any overflow */
 }
 
