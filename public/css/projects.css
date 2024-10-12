@@ -67,6 +67,14 @@
     font-weight: 600;
 }
 
+.project-interest:not(strong) {
+    color: var(--interest-color);
+}
+
+.project-skill-level:not(strong) {
+    color: var(--skillLevel-color);
+}
+
 /* No Projects Text */
 .no-projects {
     text-align: center;

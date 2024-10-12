@@ -4,6 +4,8 @@
     --text-color: #333;
     --container-bg: #ffffff;
     --hover: #593bff;
+    --interest-color: rgb(255, 137, 19);
+    --skillLevel-color: rgb(164, 73, 255);
 }
 
 body {

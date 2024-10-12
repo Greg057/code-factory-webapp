@@ -102,13 +102,13 @@ body {
 
 /* Vibrant orange for interest tag */
 .project-interest {
-  border: 2px solid rgb(255, 137, 19); /* Bright orange border */
+  border: 2px solid var(--interest-color); /* Bright orange border */
   background-color: rgba(255, 153, 51, 0.3); /* Semi-transparent orange background */
 }
 
 /* Vibrant purple for skill tag */
 .project-skill {
-  border: 2px solid rgb(164, 73, 255); /* Bright purple border */
+  border: 2px solid var(--skillLevel-color); /* Bright purple border */
   background-color: rgba(153, 51, 255, 0.3); /* Semi-transparent purple background */
 }
 
