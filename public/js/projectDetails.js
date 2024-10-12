@@ -8,6 +8,13 @@ document.addEventListener('DOMContentLoaded', function () {
         document.getElementById('sidebar').classList.remove("open")
     });
 
+    // Close the sidebar when pressing the Esc key
+    document.addEventListener('keydown', (event) => {
+        if (event.key === 'Escape' || event.key === 'Esc') {
+            sidebar.classList.remove("open");
+        }
+    });
+
     if (milestonesElement) {
         const rawMilestones = JSON.parse(milestonesElement.getAttribute('data-milestones'));
         const milestones = transformData(rawMilestones);
