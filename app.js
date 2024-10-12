@@ -2,6 +2,7 @@ import express from 'express'
 import 'dotenv/config'
 import projectsRouter from './routes/projectsRouter.js'
 import pageRouter from './routes/pageRouter.js'
+import sitemapRouter from './routes/sitemapRouter.js'
 
 const app = express()
 
@@ -21,8 +22,9 @@ app.set("view engine", "ejs")
 app.set("views", "views")
 
 app.use("/", projectsRouter)
+app.use("/sitemap.xml", sitemapRouter);
 app.use("/page/", pageRouter)
-app.use((req, res, next) => {
+app.use((req, res) => {
     res.status(404).render('404');
 });
 
