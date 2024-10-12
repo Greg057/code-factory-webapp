@@ -4,7 +4,11 @@ import projectsRouter from './routes/projectsRouter.js'
 import pageRouter from './routes/pageRouter.js'
 import sitemapRouter from './routes/sitemapRouter.js'
 
+
 const app = express()
+app.set('etag', 'strong');
+
+
 
 // Redirect HTTP to HTTPS in production
 if (process.env.NODE_ENV === 'production') {
@@ -16,7 +20,8 @@ if (process.env.NODE_ENV === 'production') {
     });
 }
 
-app.use(express.static('public'))
+app.use(express.static('public', { maxAge: '1y' })); // Sets 1-year cache for static files
+
 
 app.set("view engine", "ejs")
 app.set("views", "views")

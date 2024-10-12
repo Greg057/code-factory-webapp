@@ -34,8 +34,8 @@ body {
     display: inline-block;
     margin-right: 5px; /* Space between the icon and text */
     vertical-align: middle; /* Align icon with the text */
-    width: 48px; /* Set width for the Instagram icon */
-    height: auto; /* Maintain aspect ratio */
+    width: 40px; 
+    height: 40px; 
 }
 
 @media (max-width: 750px) {
@@ -47,6 +47,11 @@ body {
 @media (max-width: 600px) {
     .contact-container {
         max-width: 80%;
+    }
+
+    .contact-container img {
+        width: 30px; 
+        height: 30px; 
     }
 }
 
