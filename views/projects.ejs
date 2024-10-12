@@ -7,8 +7,10 @@
                     <div class="project-info">
                         <h4 class="project-title"><%= project.title %></h4>
                         <p class="project-description"><%= project.description %></p>
-                        <p class="project-interest"><strong>Interest:</strong> <%= project.interest %></p>
-                        <p class="project-skill-level"><strong>Skill Level:</strong> <%= project.skill_level %></p>
+                        <div class="project-tags">
+                            <p class="project-interest"><%= project.interest %></p>
+                            <p class="project-skill-level"><%= project.skill_level %></p>
+                        </div>
                     </div>
                 </li>
             <% }) %>

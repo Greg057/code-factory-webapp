@@ -20,7 +20,7 @@ if (process.env.NODE_ENV === 'production') {
     });
 }
 
-app.use(express.static('public', { maxAge: '1y' })); // Sets 1-year cache for static files
+app.use(express.static('public'));
 
 
 app.set("view engine", "ejs")
