@@ -9,52 +9,44 @@ document.querySelectorAll('.filter-by').forEach(filterOption => {
             }
         });
         
-        // Toggle the clicked filter options
-        if (target.style.display === 'none' || target.style.display === '') {
-            target.style.display = 'block';
+        // Show the clicked filter options
+        target.style.display = 'block';
+    });
+});
+
+document.querySelectorAll('.filter-options .option').forEach(option => {
+    option.addEventListener('click', function() {
+        const filterOptions = this.closest('.filter-options');
+        const filterBy = filterOptions.id === 'interest-options' ? 'interest' : 'skillLevel';
+        
+        // Find the corresponding filter text element
+        const filterText = document.querySelector(`#filter-by-${filterBy} .filter-text`);
+        
+        if (filterText) {
+            filterText.textContent = this.textContent;
+            document.querySelector(`input[name="${filterBy}"]`).value = this.getAttribute('data-value');
+            
+            // Hide the entire filter-options element after selection
+            filterOptions.style.display = 'none';
         } else {
-            target.style.display = 'none';
+            console.error(`Filter text element for ${filterBy} not found.`);
         }
     });
 });
 
 document.addEventListener('DOMContentLoaded', () => {
-    // Function to update the filter text
-    function updateFilterText(divName) {
-        const interestText = document.querySelector('#filter-by-interest .filter-text');
-        const skillLevelText = document.querySelector('#filter-by-skill-level .filter-text');
-        
-        // Get selected interest
-        const interestSelect = document.querySelector('#interest-select');
-        const selectedInterest = interestSelect.options[interestSelect.selectedIndex].text;
-        interestText.textContent = selectedInterest === 'All interests' ? 'All interests' : selectedInterest;
-        
-        // Update skill level filter text
-        const skillLevelSelect = document.querySelector('#skill-options select');
-        const selectedSkillLevel = skillLevelSelect.options[skillLevelSelect.selectedIndex].text;
-        skillLevelText.textContent = selectedSkillLevel === 'All skill levels' ? 'All skill levels' : selectedSkillLevel;
-
-        document.querySelector(divName).style.display = 'none';
+    function updateButtonText() {
+        const button = document.getElementById('apply-filters-btn');
+        if (window.innerWidth < 491) {
+            button.textContent = 'Apply';
+        } else {
+            button.textContent = 'Apply Filters';
+        }
     }
 
-    // Attach event listener to interest select
-    document.querySelector('#interest-options').addEventListener('change', () => updateFilterText('#interest-options'));
+    // Update on load
+    updateButtonText();
 
-    // Attach event listener to skill level select
-    document.querySelector('#skill-options').addEventListener('change', () => updateFilterText('#skill-options'));
+    // Update on resize
+    window.addEventListener('resize', updateButtonText);
 });
-
-function updateButtonText() {
-    const button = document.getElementById('apply-filters-btn');
-    if (window.innerWidth < 491) {
-        button.textContent = 'Apply';
-    } else {
-        button.textContent = 'Apply Filters';
-    }
-}
-
-// Update on load
-updateButtonText();
-
-// Update on resize
-window.addEventListener('resize', updateButtonText);

@@ -4,36 +4,38 @@
             <h4 class="filter-header">Interest</h4>
             <h6 class="filter-text"><%= interest ? interest : 'All interests'%></h6>
         </div>
-        <div class="filter-by" id="filter-by-skill-level" data-target="skill-options">
+        <div class="filter-by" id="filter-by-skillLevel" data-target="skill-options">
             <h4 class="filter-header">Skill Level</h4>
             <h6 class="filter-text"><%= skillLevel ? skillLevel : 'All skill levels'%></h6>
         </div>
         <button type="submit" id="apply-filters-btn">Apply Filters</button>
     </div>
 
+    <!-- Hidden inputs to store selected values -->
+    <input type="hidden" name="interest" value="<%= interest %>">
+    <input type="hidden" name="skillLevel" value="<%= skillLevel %>">
+
     <!-- Interest Filter Options -->
     <div class="filter-options" id="interest-options">
-        <select name="interest" id="interest-select">
-            <option value="">All interests</option>
-            <option value="Web Development" <%= (interest === 'Web Development') ? 'selected' : '' %>>Web Development</option>
-            <option value="Mobile Development" <%= (interest === 'Mobile Development') ? 'selected' : '' %>>Mobile Development</option>
-            <option value="Cybersecurity" <%= (interest === 'Cybersecurity') ? 'selected' : '' %>>Cybersecurity</option>
-            <option value="Backend" <%= (interest === 'Backend') ? 'selected' : '' %>>Backend</option>
-            <option value="AI & Machine Learning" <%= (interest === 'AI & Machine Learning') ? 'selected' : '' %>>AI & Machine Learning</option>
-            <option value="Data Science" <%= (interest === 'Data Science') ? 'selected' : '' %>>Data Science</option>
-            <option value="Game Development" <%= (interest === 'Game Development') ? 'selected' : '' %>>Game Development</option>
-            <option value="DevOps" <%= (interest === 'DevOps') ? 'selected' : '' %>>DevOps</option>
-        </select>
+        <div class="divider"></div>
+        <div class="option" data-value="">All interests</div>
+        <div class="option" data-value="Web Development">Web Development</div>
+        <div class="option" data-value="Mobile Development">Mobile Development</div>
+        <div class="option" data-value="Cybersecurity">Cybersecurity</div>
+        <div class="option" data-value="Backend">Backend</div>
+        <div class="option" data-value="AI & Machine Learning">AI & Machine Learning</div>
+        <div class="option" data-value="Data Science">Data Science</div>
+        <div class="option" data-value="Game Development">Game Development</div>
+        <div class="option" data-value="DevOps">DevOps</div>
     </div>
 
     <!-- Skill Level Filter Options -->
     <div class="filter-options" id="skill-options">
-        <select name="skillLevel">
-            <option value="">All skill levels</option>
-            <option value="Beginner" <%= (skillLevel === 'Beginner') ? 'selected' : '' %>>Beginner</option>
-            <option value="Intermediate" <%= (skillLevel === 'Intermediate') ? 'selected' : '' %>>Intermediate</option>
-            <option value="Advanced" <%= (skillLevel === 'Advanced') ? 'selected' : '' %>>Advanced</option>
-        </select>
+        <div class="divider"></div>
+        <div class="option" data-value="">All skill levels</div>
+        <div class="option" data-value="Beginner">Beginner</div>
+        <div class="option" data-value="Intermediate">Intermediate</div>
+        <div class="option" data-value="Advanced">Advanced</div>
     </div>
 </form>
 
