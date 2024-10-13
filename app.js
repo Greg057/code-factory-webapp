@@ -5,6 +5,7 @@ import pageRouter from './routes/pageRouter.js';
 import sitemapRouter from './routes/sitemapRouter.js';
 import helmet from 'helmet';
 import rateLimit from 'express-rate-limit';
+import crypto from 'crypto';
 
 const app = express()
 app.set('etag', 'strong');
@@ -28,11 +29,16 @@ const limiter = rateLimit({
 
 app.use(limiter);
 
+app.use((req, res, next) => {
+    res.locals.nonce = crypto.randomBytes(16).toString('base64');
+    next();
+});
+
 app.use(helmet());
 app.use(helmet.contentSecurityPolicy({
     directives: {
         defaultSrc: ["'self'"],
-        scriptSrc: ["'self'", "trusted-cdn.com"],
+        scriptSrc: ["'self'", "trusted-cdn.com", "https://www.googletagmanager.com", "https://d3js.org", (req, res) => `'nonce-${res.locals.nonce}'`],
         styleSrc: ["'self'", "trusted-cdn.com"],
         imgSrc: ["'self'", "trusted-cdn.com"],
         connectSrc: ["'self'"],
@@ -49,7 +55,6 @@ app.use((req, res, next) => {
     res.setHeader('X-XSS-Protection', '1; mode=block');
     next();
 });
-
 
 app.set("view engine", "ejs")
 app.set("views", "views")
