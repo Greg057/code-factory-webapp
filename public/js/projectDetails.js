@@ -22,11 +22,10 @@ document.addEventListener('DOMContentLoaded', function () {
         function createTreeLayout() {
             const headerHeight = document.querySelector('.header').offsetHeight;
             const projectHeaderHeight = document.querySelector('.project-header').offsetHeight;
-            const milestoneTitleHeight = document.querySelector('.milestone-title').offsetHeight;
             const windowsTaskBarHeight = 60;
 
             // Calculate tree height based on 100vh minus the combined heights
-            const availableHeightForTree = window.innerHeight - headerHeight - projectHeaderHeight - milestoneTitleHeight - windowsTaskBarHeight;
+            const availableHeightForTree = window.innerHeight - headerHeight - projectHeaderHeight - windowsTaskBarHeight;
             
             const minWidth = 120;
 
@@ -82,17 +81,21 @@ document.addEventListener('DOMContentLoaded', function () {
             // Calculate tree width and adjust the initial zoom to fit the container
             const { minX, width: treeWidth } = calculateTreeWidth();
             
+            
             const milestoneContainerWidth = document.querySelector('.milestone-container').clientWidth;
             let zoomScale = 1;
             if (treeWidth + 200 > milestoneContainerWidth) {
                 zoomScale = milestoneContainerWidth / (treeWidth + 300);
             }
 
+            console.log('treeHeight:', treeHeight);
+            console.log('availableHeightForTree:', availableHeightForTree);
             // Adjust zoom scale if tree height exceeds container height
             if (treeHeight + 50 > availableHeightForTree) {
-                const heightScale = availableHeightForTree / (treeHeight + 50);
+                const heightScale = availableHeightForTree / (treeHeight + 0);
                 zoomScale = Math.min(zoomScale, heightScale); // Use the smaller of the two scales
             }
+            console.log('zoomScale:', zoomScale);
 
             // Set the initial translate to center the tree horizontally within the container
             const initialTranslateX = (milestoneContainerWidth - treeWidth * zoomScale) / 2 - minX * zoomScale;

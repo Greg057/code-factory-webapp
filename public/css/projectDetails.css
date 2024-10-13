@@ -63,14 +63,11 @@ body {
 }
 
 /* Project Details Page */
-.container {
-  width: 90%;
-  margin: 0 auto;
-  padding: 20px;
-}
-
 .project-header {
   border-bottom: 2px solid #33333341;
+  width: 90%;
+  margin: 0 auto;
+  padding: 20px 20px 0;
 }
 
 .project-title {
@@ -116,11 +113,6 @@ body {
   font-size: 16px;
   color: #666;
   margin-top: 10px;
-}
-
-.milestone-title {
-  font-size: 22px;
-  margin-top: 8px;
 }
 
 #milestoneTree {
