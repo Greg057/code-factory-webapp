@@ -6,6 +6,7 @@ import sitemapRouter from './routes/sitemapRouter.js';
 import helmet from 'helmet';
 import rateLimit from 'express-rate-limit';
 import crypto from 'crypto';
+import compression from 'compression';
 
 const app = express()
 app.set('etag', 'strong');
@@ -21,6 +22,7 @@ if (process.env.NODE_ENV === 'production') {
 }
 
 app.use(express.static('public'));
+app.use(compression());
 
 const limiter = rateLimit({
     windowMs: 15 * 60 * 1000, // 15 minutes
