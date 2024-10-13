@@ -80,25 +80,18 @@ document.addEventListener('DOMContentLoaded', function () {
 
             // Calculate tree width and adjust the initial zoom to fit the container
             const { minX, maxX, width: treeWidth } = calculateTreeWidth();
-            
-        
             const milestoneContainerWidth = document.querySelector('.milestone-container').clientWidth;
 
-            console.log('treeWidth:', treeWidth);
-            console.log('milestoneContainerWidth:', milestoneContainerWidth);
             let zoomScale = 1;
             if (treeWidth + 300 > milestoneContainerWidth) {
                 zoomScale = milestoneContainerWidth / (treeWidth + 300);
             }
 
-            console.log('treeHeight:', treeHeight);
-            console.log('availableHeightForTree:', availableHeightForTree);
             // Adjust zoom scale if tree height exceeds container height
             if (treeHeight > availableHeightForTree) {
                 const heightScale = availableHeightForTree / treeHeight;
                 zoomScale = Math.min(zoomScale, heightScale); // Use the smaller of the two scales
             }
-            console.log('zoomScale:', zoomScale);
 
             // Set the initial translate to center the tree horizontally within the container
             const initialTranslateX = (milestoneContainerWidth - (maxX - minX) * zoomScale) / 2 - minX * zoomScale;
