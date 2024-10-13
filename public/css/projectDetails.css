@@ -37,10 +37,15 @@ body {
   transition: transform 0.3s ease;
 }
 
+.background-close-btn {
+  width: 100%;
+  padding: 12px 20px;
+  background-color: rgb(255, 255, 255);
+  position: relative; /* Ensure it is positioned relative to the sidebar */
+  z-index: 1001; /* Ensure it is above the sidebar content */
+}
+
 .close-btn {
-  position: absolute;
-  top: 20px;
-  left: 20px; /* Move button to the left */
   padding: 8px 18px;
   font-size: 14px;
   font-weight: bold;
@@ -49,6 +54,7 @@ body {
   border: 0px;
   border-radius: 6px;
   cursor: pointer;
+  z-index: 1002;
 }
 
 .close-btn:hover {
@@ -56,8 +62,7 @@ body {
 }
 
 #sidebarContent {
-  padding: 20px;
-  padding-top: 60px;
+  padding: 0 20px 20px;
   height: calc(100% - 60px); /* Subtract space for the close button */
   overflow-y: auto; /* Enable vertical scrolling if needed */
 }
@@ -158,7 +163,7 @@ body {
 .milestone-detail-description {
   font-size: 1.1em;
   color: var(--text-color);
-  margin-bottom: 20px;
+  margin: 8px 0;
 }
 
 .milestone-detail-section {
