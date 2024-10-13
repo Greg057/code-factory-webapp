@@ -79,26 +79,29 @@ document.addEventListener('DOMContentLoaded', function () {
             }
 
             // Calculate tree width and adjust the initial zoom to fit the container
-            const { minX, width: treeWidth } = calculateTreeWidth();
+            const { minX, maxX, width: treeWidth } = calculateTreeWidth();
             
-            
+        
             const milestoneContainerWidth = document.querySelector('.milestone-container').clientWidth;
+
+            console.log('treeWidth:', treeWidth);
+            console.log('milestoneContainerWidth:', milestoneContainerWidth);
             let zoomScale = 1;
-            if (treeWidth + 200 > milestoneContainerWidth) {
+            if (treeWidth + 300 > milestoneContainerWidth) {
                 zoomScale = milestoneContainerWidth / (treeWidth + 300);
             }
 
             console.log('treeHeight:', treeHeight);
             console.log('availableHeightForTree:', availableHeightForTree);
             // Adjust zoom scale if tree height exceeds container height
-            if (treeHeight + 50 > availableHeightForTree) {
-                const heightScale = availableHeightForTree / (treeHeight + 0);
+            if (treeHeight > availableHeightForTree) {
+                const heightScale = availableHeightForTree / treeHeight;
                 zoomScale = Math.min(zoomScale, heightScale); // Use the smaller of the two scales
             }
             console.log('zoomScale:', zoomScale);
 
             // Set the initial translate to center the tree horizontally within the container
-            const initialTranslateX = (milestoneContainerWidth - treeWidth * zoomScale) / 2 - minX * zoomScale;
+            const initialTranslateX = (milestoneContainerWidth - (maxX - minX) * zoomScale) / 2 - minX * zoomScale;
 
             // Set the initial zoom transformation to center the entire tree with scaling
             const initialTransform = d3.zoomIdentity
@@ -107,8 +110,6 @@ document.addEventListener('DOMContentLoaded', function () {
 
             // Apply the default zoom transformation to center and fit the tree
             svgContainer.call(zoom.transform, initialTransform);
-
-            
 
             // Create a diagonal path generator for the links
             const diagonal = d3.linkVertical()
